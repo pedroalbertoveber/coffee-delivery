@@ -1,7 +1,15 @@
-export function App() {
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyles } from './styles/global'
+import { defaultTheme } from './styles/themes/defaultTheme'
 
+export function App() {
   return (
-    <h1>Olá Mundo!</h1>
+    <>
+      <ThemeProvider theme={defaultTheme}>
+        <h1>Olá Mundo!</h1>
+
+        <GlobalStyles />
+      </ThemeProvider>
+    </>
   )
 }
-
