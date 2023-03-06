@@ -42,9 +42,29 @@ export const LocationButton = styled(ActionButtonContainerDefault)`
 `
 
 export const GroceryCartButton = styled(ActionButtonContainerDefault)`
+  position: relative;
   background-color: ${(props) => props.theme.yellowLight};
   color: ${(props) => props.theme.yellow};
   svg {
     fill: ${(props) => props.theme.yellow};
+  }
+
+  span {
+    position: absolute;
+    background-color: ${(props) => props.theme.yellowDark};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+
+    font-weight: bold;
+    font-size: 0.75rem;
+    color: ${(props) => props.theme.white};
+
+    transform: translate(-50%, -50%);
+    left: 100%;
+    bottom: 35%;
   }
 `

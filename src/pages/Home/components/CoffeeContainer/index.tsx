@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react'
+import { CoffeeType } from '../../../../@types/coffee'
 import { coffees } from '../../../../data/coffees'
 import { CoffeeItem } from '../CoffeeItem'
 import { StyledCoffeeContainer } from './styles'
 
 export function CoffeeContainer() {
-  const coffeeList = coffees
+  const [coffeeList, setCoffeList] = useState<CoffeeType[]>([])
+
+  useEffect(() => {
+    setCoffeList(coffees)
+  }, [])
 
   return (
     <StyledCoffeeContainer>
