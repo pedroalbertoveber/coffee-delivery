@@ -4,7 +4,7 @@ const BACKGROUND_COLORS = {
   yellow: `yellow`,
   yellowDark: 'yellowDark',
   purple: 'purple',
-  black: 'baseLabel',
+  black: 'baseText',
 } as const
 
 interface BannerProps {

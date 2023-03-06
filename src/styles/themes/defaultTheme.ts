@@ -2,7 +2,7 @@ export const defaultTheme = {
   white: '#ffffff',
   background: '#fafafa',
 
-  baseCard: '#f3f2f2',
+  baseCard: '#F3F2F2',
   baseInput: '#ededed',
   baseButton: '#e6e5e5',
   baseHover: '#d7d5d5',
