@@ -17,4 +17,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color: ${(props) => props.theme.baseText}
   }
+
+  ul {
+    list-style: none
+  }
 `

@@ -7,8 +7,8 @@ export const CartQtdContainer = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme.baseButton};
   border-radius: 6px;
-  margin-left: 1.4rem;
   margin-right: 0.5rem;
+  max-height: 2rem;
 
   span {
     display: flex;

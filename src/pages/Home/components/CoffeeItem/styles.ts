@@ -66,9 +66,11 @@ export const StyledTagsContainer = styled.div`
 
 export const CartActionsContainer = styled.div`
   display: flex;
+  align-items: center;
   p {
     display: inline-block;
     font-size: 1rem;
+    margin-right: 1.4rem;
 
     strong {
       font-family: 'Baloo 2', sans-serif;
