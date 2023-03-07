@@ -2,8 +2,16 @@ import { CartListItem } from '../../../../@types/cartListItem'
 import { InsertOrRemoveCoffeeInCart } from '../../../../components/InsertOrRemoveCoffeeInCart'
 import { CoffeeItemContainer, InfoContainer } from './styles'
 import { Trash } from 'phosphor-react'
+import { useContext } from 'react'
+import { CartContext } from '../../../../context/CartContext'
 
 export function CardCoffeeItem(coffee: CartListItem) {
+  const { removeItemFromCartList } = useContext(CartContext)
+
+  function removeCoffee(id: string) {
+    removeItemFromCartList(id)
+  }
+
   return (
     <CoffeeItemContainer>
       <div className="imageContainer">
@@ -13,7 +21,7 @@ export function CardCoffeeItem(coffee: CartListItem) {
         <h4>{coffee.name}</h4>
         <div className="actions">
           <InsertOrRemoveCoffeeInCart {...coffee} />
-          <button>
+          <button onClick={() => removeCoffee(coffee.id)}>
             <Trash size={16} weight="fill" />
             REMOVER
           </button>

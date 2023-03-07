@@ -5,6 +5,7 @@ import {
   addNewCoffeeAction,
   clearCartAction,
   removeCoffeeFromCartAction,
+  removeItemFromCartAction,
 } from '../reducers/cartList/actions'
 import { CartListItem } from '../@types/cartListItem'
 
@@ -14,6 +15,7 @@ interface CartList {
   removeCoffee(id: string): void
   clearCartList(): void
   verifyCoffeeIsInCartList(id: string): number
+  removeItemFromCartList(id: string): void
 }
 
 export const CartContext = createContext({} as CartList)
@@ -37,6 +39,10 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
     dispatch(removeCoffeeFromCartAction(id))
   }
 
+  function removeItemFromCartList(id: string) {
+    dispatch(removeItemFromCartAction(id))
+  }
+
   function verifyCoffeeIsInCartList(id: string): number {
     const isCoffeeInCartList = coffeesInCartList.findIndex(
       (item) => item.id === id,
@@ -57,6 +63,7 @@ export function CartContextProvider({ children }: { children: ReactNode }) {
         clearCartList,
         removeCoffee,
         verifyCoffeeIsInCartList,
+        removeItemFromCartList,
       }}
     >
       {children}

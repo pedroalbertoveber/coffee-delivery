@@ -44,26 +44,30 @@ export function cartListReducer(coffee: Coffee, action: any) {
         }
       }
 
-      const selectedCoffeeIndex = coffee.coffeesInCartList.findIndex(
-        (item) => item.id === action.payload.id,
-      )
+      const selectedCoffeeId = action.payload.id
 
-      const isInTheCartList = selectedCoffeeIndex > 0
-      console.log(coffee.coffeesInCartList)
+      const isInTheCartList = coffee.coffeesInCartList.some(
+        (item) => item.id === selectedCoffeeId,
+      )
 
       if (!isInTheCartList) {
         return coffee
       }
 
+      const selectedCoffeeIndex = coffee.coffeesInCartList.findIndex(
+        (item) => item.id === action.payload.id,
+      )
+
       const isTheLastOne =
         coffee.coffeesInCartList[selectedCoffeeIndex].qtd === 1
 
       if (isTheLastOne) {
+        console.log(coffee.coffeesInCartList)
         return produce(coffee, (draft) => {
           draft.coffeesInCartList[selectedCoffeeIndex].qtd = 0
-          draft.coffeesInCartList.filter(
-            (item) => item.id !== action.payload.id,
-          )
+          draft.coffeesInCartList = draft.coffeesInCartList.filter((item) => {
+            return item.id !== selectedCoffeeId
+          })
         })
       } else {
         return produce(coffee, (draft) => {
@@ -76,6 +80,16 @@ export function cartListReducer(coffee: Coffee, action: any) {
       return produce(coffee, (draft) => {
         draft.coffeesInCartList.map((item) => (item.qtd = 0))
         draft.coffeesInCartList = []
+      })
+    }
+
+    case ActionTypes.REMOVE_ITEM: {
+      const selectedId = action.payload.id
+
+      return produce(coffee, (draft) => {
+        draft.coffeesInCartList = draft.coffeesInCartList.filter((item) => {
+          return item.id !== selectedId
+        })
       })
     }
 
