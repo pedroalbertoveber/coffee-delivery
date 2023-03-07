@@ -6,7 +6,7 @@ import {
   LocationButton,
   GroceryCartButton,
 } from './styles'
-
+import { NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 
@@ -29,8 +29,10 @@ export function Header() {
         </LocationButton>
 
         <GroceryCartButton>
-          <ShoppingCart size={22} weight="fill" />
-          {coffeeListItemsQtd > 0 && <span>{coffeeListItemsQtd}</span>}
+          <NavLink to={'/carrinho'}>
+            <ShoppingCart size={22} weight="fill" />
+            {coffeeListItemsQtd > 0 && <span>{coffeeListItemsQtd}</span>}
+          </NavLink>
         </GroceryCartButton>
       </ActionsContainer>
     </HeaderContainer>

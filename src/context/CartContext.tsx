@@ -19,28 +19,11 @@ interface CartList {
 export const CartContext = createContext({} as CartList)
 
 export function CartContextProvider({ children }: { children: ReactNode }) {
-  const [cartListState, dispatch] = useReducer(
-    cartListReducer,
-    { coffeesInCartList: [] },
-    (initialState) => {
-      const storedStateAsJSON = localStorage.getItem(
-        '@coffee-delivery:cart-list-1.0.0',
-      )
-
-      if (storedStateAsJSON) {
-        return JSON.parse(storedStateAsJSON)
-      }
-
-      return initialState
-    },
-  )
+  const [cartListState, dispatch] = useReducer(cartListReducer, {
+    coffeesInCartList: [],
+  })
 
   const { coffeesInCartList } = cartListState
-
-  useEffect(() => {
-    const stateJSON = JSON.stringify(cartListState)
-    localStorage.setItem('@coffee-delivery:cart-list-1.0.0', stateJSON)
-  }, [cartListState])
 
   function addCoffeeToCartList(data: CoffeeType) {
     dispatch(addNewCoffeeAction(data))

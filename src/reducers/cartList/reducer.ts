@@ -10,19 +10,21 @@ interface Coffee {
 export function cartListReducer(coffee: Coffee, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_NEW_COFFEE: {
-      const isAlreadyInCartList = coffee.coffeesInCartList.find(
-        (item) => item.id === action.payload.coffee.id,
+      const selectedCoffee: CoffeeType = action.payload.coffee
+
+      const isAlreadyInCartList = coffee.coffeesInCartList.some(
+        (item) => item.id === selectedCoffee.id,
       )
 
       if (isAlreadyInCartList) {
         const selectedCoffeeIndex = coffee.coffeesInCartList.findIndex(
-          (item) => item.id === action.payload.coffee.id,
+          (item) => item.id === selectedCoffee.id,
         )
         return produce(coffee, (draft) => {
           draft.coffeesInCartList[selectedCoffeeIndex].qtd += 1
         })
       } else {
-        const addedCoffee: CartListItem = { ...action.payload.coffee, qtd: 1 }
+        const addedCoffee: CartListItem = { ...selectedCoffee, qtd: 1 }
         return produce(coffee, (draft) => {
           draft.coffeesInCartList.push(addedCoffee)
         })
@@ -30,11 +32,24 @@ export function cartListReducer(coffee: Coffee, action: any) {
     }
 
     case ActionTypes.REMOVE_COFFEE: {
+      if (coffee.coffeesInCartList.length === 1) {
+        if (coffee.coffeesInCartList[0].qtd === 1) {
+          return produce(coffee, (draft) => {
+            draft.coffeesInCartList = []
+          })
+        } else {
+          return produce(coffee, (draft) => {
+            draft.coffeesInCartList[0].qtd -= 1
+          })
+        }
+      }
+
       const selectedCoffeeIndex = coffee.coffeesInCartList.findIndex(
         (item) => item.id === action.payload.id,
       )
 
       const isInTheCartList = selectedCoffeeIndex > 0
+      console.log(coffee.coffeesInCartList)
 
       if (!isInTheCartList) {
         return coffee
