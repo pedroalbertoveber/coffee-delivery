@@ -46,7 +46,7 @@ export function ResumeItemsBudget({ cartList }: Props) {
         <h3>Total</h3>
         <h3>R$ {totalAmountFormated}</h3>
       </BudgetItem>
-      <ButtonContainer>CONFIRMAR PEDIDO</ButtonContainer>
+      <ButtonContainer type="submit">CONFIRMAR PEDIDO</ButtonContainer>
     </BudgetContainer>
   )
 }

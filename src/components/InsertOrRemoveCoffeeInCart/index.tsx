@@ -37,6 +37,7 @@ export function InsertOrRemoveCoffeeInCart(data: CoffeeType) {
       <button
         onClick={() => handleRemoveCoffeeFromCartList(data.id)}
         disabled={selectedCoffeQtd === 0}
+        type={'button'}
       >
         <Minus size={14} weight={'fill'} />
       </button>
@@ -44,6 +45,7 @@ export function InsertOrRemoveCoffeeInCart(data: CoffeeType) {
       <button
         onClick={() => handleAddCoffeToCartList(data)}
         disabled={selectedCoffeQtd >= 5}
+        type={'button'}
       >
         <Plus size={14} weight={'fill'} />
       </button>

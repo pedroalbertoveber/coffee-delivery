@@ -1,8 +1,11 @@
 import { CurrencyDollar, Money, CreditCard, Bank } from 'phosphor-react'
+import { useFormContext } from 'react-hook-form'
 import { CardSubtitle } from '../CardSubtitle'
 import { PaymentMethodFormContainer, MethodCard } from './styles'
 
 export function PaymentMethodForm() {
+  const { register } = useFormContext()
+
   return (
     <PaymentMethodFormContainer>
       <CardSubtitle
@@ -14,17 +17,35 @@ export function PaymentMethodForm() {
         }
       />
       <div className="methodsContainer">
-        <MethodCard>
+        <MethodCard htmlFor="paymentMethod_credit">
           <CreditCard size={16} weight="fill" />
-          <label>CARTÃO DE CRÉDITO</label>
+          <span>CARTÃO DE CRÉDITO</span>
+          <input
+            type={'radio'}
+            value={'Cartão de Crédito'}
+            id="paymentMethod_credit"
+            {...register('paymentMethod')}
+          />
         </MethodCard>
-        <MethodCard>
+        <MethodCard htmlFor="paymentMethod_debit">
           <Bank size={16} weight="fill" />
-          <label>CARTÃO DE DÉBITO</label>
+          <span>CARTÃO DE DÉBITO</span>
+          <input
+            type={'radio'}
+            value={'Cartão de Débito'}
+            id="paymentMethod_debit"
+            {...register('paymentMethod')}
+          />
         </MethodCard>
-        <MethodCard>
+        <MethodCard htmlFor="paymentMethod_cash">
           <Money size={16} weight="fill" />
-          <label>DINHEIRO</label>
+          <span>DINHEIRO</span>
+          <input
+            type={'radio'}
+            value={'Dinheiro'}
+            id="paymentMethod_cash"
+            {...register('paymentMethod')}
+          />
         </MethodCard>
       </div>
     </PaymentMethodFormContainer>

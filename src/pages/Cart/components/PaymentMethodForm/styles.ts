@@ -20,7 +20,7 @@ export const PaymentMethodFormContainer = styled.div`
     width: 100%;
   }
 `
-export const MethodCard = styled.div`
+export const MethodCard = styled.label`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -38,9 +38,17 @@ export const MethodCard = styled.div`
     cursor: inherit;
   }
 
-  label {
+  span {
     font-size: 0.75rem;
     color: ${(props) => props.theme.baseText};
     cursor: inherit;
+  }
+
+  input {
+    opacity: 0;
+  }
+  &:has([type='radio']:checked) {
+    background-color: ${(props) => props.theme.purpleLight};
+    border-color: ${(props) => props.theme.purple};
   }
 `

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CartContainer = styled.section`
+export const CartContainer = styled.form`
   display: flex;
   gap: 2rem;
   padding: 2.5rem 0;

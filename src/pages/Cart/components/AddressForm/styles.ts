@@ -15,7 +15,7 @@ export const StyledFormContainer = styled.div`
   margin-top: -0.625rem;
   width: 100%;
 
-  form {
+  .formContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
