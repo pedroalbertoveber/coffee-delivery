@@ -5,6 +5,9 @@ import { CartContainer, Separator } from './styles'
 import { FormProvider, useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
 
 const AddressAndPaymentMethodValidationSchema = z.object({
   zipcode: z.string().max(9).min(8),
@@ -17,10 +20,12 @@ const AddressAndPaymentMethodValidationSchema = z.object({
   paymentMethod: z.enum(['Cartão de Crédito', 'Cartão de Débito', 'Dinheiro']),
 })
 
-type FormData = z.infer<typeof AddressAndPaymentMethodValidationSchema>
+export type OrderFormData = z.infer<
+  typeof AddressAndPaymentMethodValidationSchema
+>
 
 export function Cart() {
-  const adressAndPaymentFormData = useForm<FormData>({
+  const adressAndPaymentFormData = useForm<OrderFormData>({
     resolver: zodResolver(AddressAndPaymentMethodValidationSchema),
     defaultValues: {
       zipcode: '',
@@ -34,10 +39,14 @@ export function Cart() {
     },
   })
 
+  const { clearCartList } = useContext(CartContext)
   const { handleSubmit } = adressAndPaymentFormData
+  const navigate = useNavigate()
 
-  function submitAddressAndPaymentForm(data: FormData) {
-    console.log(data)
+  function submitAddressAndPaymentForm(data: OrderFormData) {
+    localStorage.setItem('@coffee-delivery:v-1.0.0', JSON.stringify(data))
+    clearCartList()
+    navigate('/pedido')
   }
 
   return (
